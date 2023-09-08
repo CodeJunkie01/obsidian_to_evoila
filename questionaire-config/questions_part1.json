@@ -1,0 +1,12 @@
+{
+  "questions": [
+    {
+      "id": "Frage-7",
+      "questionText": "Muss die KI-Lösung ständig verfügbar und funktionsfähig sein? Anders gefragt, würde ein Ausfall der KI-Lösung Schaden verursachen @{labore}?",
+      "answers": [
+        { "id": "Frage-7_A1", "answerText": "Ja" },
+        { "id": "Frage-7_A2", "answerText": "nein" }
+      ]
+    }
+  ]
+}
