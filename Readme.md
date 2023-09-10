@@ -14,5 +14,5 @@ Windows:
 - pscp -r questionaire-config root@domain.de:/home/WeKI-GO-v1.9.2/WeKI-GO-docker-compose
 
 3. Step
-docker compose down
-"docker compose up -d" if config is ready for production or "docker compose up" to see the logs
+sudo docker compose down
+"sudo docker compose up -d" if config is ready for production or "sudo docker compose up" to see the logs
