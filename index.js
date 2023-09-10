@@ -296,11 +296,17 @@ const createRecommendations = (content, fileName) => {
   const recommendationText = content.split("Text:")[1]?.trim();
   if (!recommendationText || recommendationText === "")
     warnings.push("Empfehlung ohne Text in Datei " + fileName);
+  const fileString = content?.split("FFF")[1]?.trim();
+  let files;
+  if (fileString && fileString !== "") {
+    console.log(fileString);
+    files = JSON.parse("[" + fileString + "]" || "[]");
+  }
   return {
     id: "[[" + recommendationName + "]]",
     text: recommendationText,
     title: recommendationName.replaceAll("_", " "),
-    files: [],
+    files: files || [],
   };
 };
 
