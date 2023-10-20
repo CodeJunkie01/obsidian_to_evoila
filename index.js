@@ -37,12 +37,14 @@ const processFiles = async () => {
                   id: question.id,
                   questionText: question.questionText,
                   answers: question.answers,
+                  position: question.position,
                 });
               } else {
                 questions.push({
                   id: question.id,
                   questionText: question.questionText,
                   answers: question.answers,
+                  position: question.position,
                 });
               }
             });
@@ -167,7 +169,7 @@ const processFiles = async () => {
   }
   fs.writeFile(
     outputFolderPath + "/questions_part1.json",
-    JSON.stringify({ questions: questions_part1 }),
+    JSON.stringify({ questions: questions_part1.sort((a, b) => parseInt(a.position, 10) - parseInt(b.position, 10)).map(q => {return {id: q.id, questionText: q.questionText, answers: q.answers}}) }),
     function (err) {
       if (err) throw err;
       console.log("Questions part 1 written");
@@ -176,7 +178,11 @@ const processFiles = async () => {
   // write the output files
   fs.writeFile(
     outputFolderPath + "/questions_part2.json",
-    JSON.stringify({ questions: questions }),
+    JSON.stringify({ questions: questions.sort((a, b) => {
+      console.log({a,b});
+      return parseInt(a.position, 10) - parseInt(b.position, 10);
+    }).map(q => {return {id: q.id, questionText: q.questionText, answers: q.answers}})
+    }),
     function (err) {
       if (err) throw err;
       console.log("Questions part 2 written");
@@ -334,6 +340,7 @@ const createQuestions = (content, fileName) => {
   if (tempArray.length > 0) {
     questionsLines.push(tempArray);
   }
+  const position = content?.split("Reihenfolge:")?.[1]?.split("\n")[0]?.trim()
 
   let answerIndex = 1;
   const questions = questionsLines.map((questionLines, index) => {
@@ -358,6 +365,7 @@ const createQuestions = (content, fileName) => {
       questionText,
       answers: answers,
       part,
+      position: position || "0",
     };
   });
 
